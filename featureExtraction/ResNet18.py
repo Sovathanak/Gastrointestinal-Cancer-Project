@@ -8,7 +8,11 @@ import torchvision.models as models
 
 # The method above does not work properly for me, I researched further and found this instead, it works for me but just make sure
 # that you install the full pytorch package
-# use this: pip3 install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio===0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+# command below is for the gpu version (if you have an nvidia gpu then it works) 
+# pip3 install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio===0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+# if you don't then the command above will cause errors when you try to run code
+# use this command instead: pip install torch torchvision 
 
 """Model creation"""
 resnet18 = models.resnet18(pretrained=True)
