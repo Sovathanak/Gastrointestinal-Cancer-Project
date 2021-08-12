@@ -4,7 +4,7 @@ import torchvision.models as models
 # The tensorflow/keras version is not working, so it has been removed
 
 vgg16 = models.vgg16(pretrained=True)
-vgg16 = vgg16.cpu()
+vgg16 = vgg16.cuda() if torch.cuda.is_available() else vgg16.cpu()
 # print(vgg16)
 
 # Below feature extractor is taken from https://stackoverflow.com/questions/55083642/extract-features-from-last-hidden-layer-pytorch-resnet18

@@ -7,7 +7,7 @@ import torchvision.models as models
 # This function needs to have scipy installed (pip3 install scipy)
 
 inception = models.inception_v3(pretrained=True)
-inception = inception.cpu()
+inception = inception.cuda() if torch.cuda.is_available() else inception.cpu()
 # print(inception)
 
 # Implementation below is adapted from https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
