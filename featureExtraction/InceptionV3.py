@@ -4,6 +4,6 @@ import torchvision.models as models
 
 # This function needs to have scipy installed (pip3 install scipy)
 
-inception = models.inception_v3()
+inception = models.inception_v3(pretrained=True)
 inception = inception.cpu()
-print(inception)
+# print(inception)
