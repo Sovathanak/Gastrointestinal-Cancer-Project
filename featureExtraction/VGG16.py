@@ -57,8 +57,7 @@ for i in range(len(dataset)):
     features = feature_extractor(images)
     x = features, labels
     extracted_features.append(x)
-
-print(extracted_features)
+# print(extracted_features)
 
 
 
