@@ -1,7 +1,17 @@
 import torch
+from torch.utils import data
 import torchvision.models as models
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
 
 # The tensorflow/keras version is not working, so it has been removed
+
+BATCH_SIZE = 32
+
+# 
+image_path = "/Users/vincentarsontaneli/VSCode/featureExtraction/images"
+images = ImageFolder(root=image_path) 
+dataset = DataLoader(dataset=images, batch_size=BATCH_SIZE, shuffle=True)
 
 vgg16 = models.vgg16(pretrained=True)
 vgg16 = vgg16.cpu()
@@ -16,5 +26,8 @@ feature_extractor = torch.nn.Sequential(*list(vgg16.children())[:-1])
 
 """Test"""
 x = torch.randn([1, 3, 224, 224])  # Random input
-output = feature_extractor(x)  # This holds the features corresponding to input x
+# output = feature_extractor(x)  # This holds the features corresponding to input x
 # print(output.shape)
+
+output = feature_extractor(dataset)  # This holds the features corresponding to input x
+print(output.shape)

@@ -29,4 +29,4 @@ feature_extractor = torch.nn.Sequential(*list(resnet18.children())[:-1])
 """Test"""
 x = torch.randn([1, 3, 224, 224])  # Random input
 output = feature_extractor(x)  # This holds the features corresponding to input x
-# print(output.shape)
+print(output.shape)

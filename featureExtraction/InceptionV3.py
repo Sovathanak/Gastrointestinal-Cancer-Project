@@ -88,4 +88,4 @@ class MyInceptionFeatureExtractor(nn.Module):
 """Test"""
 new_inception = MyInceptionFeatureExtractor(inception)
 features = new_inception.forward(torch.randn([1, 3, 224, 224]))
-# print(features.shape)
+print(features.shape)
