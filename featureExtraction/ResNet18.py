@@ -16,7 +16,7 @@ import torchvision.models as models
 
 """Model creation"""
 resnet18 = models.resnet18(pretrained=True)
-resnet18 = resnet18.cpu()
+resnet18 = resnet18.cuda() if torch.cuda.is_available() else resnet18.cpu()
 # print(resnet18)
 
 # Below feature extractor is taken from https://stackoverflow.com/questions/55083642/extract-features-from-last-hidden-layer-pytorch-resnet18
