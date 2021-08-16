@@ -15,6 +15,9 @@ BATCH_SIZE = 5
 """Stores images in batches"""
 # ImageFolder automatically labels images and transforms images to tensors
 # DataLoader stores the images in batches
+
+# Make sure to put in the directory of your "images" folder and not the specific folders. 
+# put in like so: C:/Users/<computer_name>/.../GitHub/Gastrointestinal-Cancer-Project/images/
 image_path = ""
 image = ImageFolder(root=image_path, transform=transforms.ToTensor()) 
 dataset = DataLoader(dataset=image, batch_size=BATCH_SIZE, shuffle=False)
