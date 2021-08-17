@@ -7,11 +7,12 @@ import torchvision.models as models
 # This function needs to have scipy installed (pip3 install scipy)
 
 inception = models.inception_v3(pretrained=True)
-inception = inception.cuda() if torch.cuda.is_available() else inception.cpu()
+inception = inception.cpu() if torch.cuda.is_available() else inception.cpu()
 # print(inception)
 
 # Implementation below is adapted from https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
 # See post #49 by fmassa
+
 
 class MyInceptionFeatureExtractor(nn.Module):
     def __init__(self, inception, transform_input=False):
@@ -84,6 +85,7 @@ class MyInceptionFeatureExtractor(nn.Module):
         # Adaptive average pooling
         x = self.avgpool(x)
         return x
+
 
 """Test"""
 new_inception = MyInceptionFeatureExtractor(inception)
