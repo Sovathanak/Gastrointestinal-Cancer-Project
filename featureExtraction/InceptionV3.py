@@ -1,12 +1,13 @@
+import csv
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torchvision.models as models
-from torch.utils.data import DataLoader
-from torchvision.datasets import ImageFolder
-from torchvision import transforms
-import csv
-import numpy as np
 from sklearn import decomposition
+from torch.utils.data import DataLoader
+from torchvision import transforms
+from torchvision.datasets import ImageFolder
 
 # The tensorflow/keras version is not working, so it has been removed
 
@@ -32,9 +33,12 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 """Model creation"""
 inception = models.inception_v3(pretrained=True)
 inception = inception.to(device)
+
+
 # print(inception)
 
-# Implementation below is adapted from https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
+# Implementation below is adapted from:
+# https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
 # See post #49 by fmassa
 
 class MyInceptionFeatureExtractor(nn.Module):
@@ -113,6 +117,7 @@ class MyInceptionFeatureExtractor(nn.Module):
         # N x 2048 x 1 x 1
         return x
 
+
 feature_extractor = MyInceptionFeatureExtractor(inception)
 
 """Extract features from batches and apply PCA"""
@@ -126,25 +131,25 @@ with open("extractedFeatures/InceptionV3features.csv", "w") as file:
         images, labels = dataiter.next()
         images = images.to(device)
         features = feature_extractor.forward(images)
-        
+
         # PCA process
         batch_size, nsamples, nx, ny = features.shape
-        
+
         # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
-        features = features.reshape((nsamples, nx*ny))
-        
+        features = features.reshape((nsamples, nx * ny))
+
         # Alternative, simpler solution (subject to discussion)
         # features = torch.flatten(features)
 
-        # print(features.shape)  # torch.Size([1, 512, 7, 7]) == [batch_size, nsamples (number of nx*ny arrays), nx, ny]
+        # print(features.shape)  # [batch_size, nsamples (number of nx*ny arrays), nx, ny]
 
         # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
         features = features.cpu().detach().numpy()
-        
+
         # Decomposition of nx*ny features and choosing only the 10 most valuable features to train on
         pca = decomposition.PCA(n_components=10)
         pcaFeature = pca.fit_transform(features)
         # if you need to see the format/structure after using the pca, uncomment the 2 lines below
         # print(pcaX)
         # break
-        write.writerow((labels, pcaFeature)) # write to the csv file 
+        write.writerow((labels, pcaFeature))  # write to the csv file

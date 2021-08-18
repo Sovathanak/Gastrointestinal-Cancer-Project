@@ -1,11 +1,12 @@
+import csv
+
+import numpy as np
 import torch
 import torchvision.models as models
-from torch.utils.data import DataLoader
-from torchvision.datasets import ImageFolder
-from torchvision import transforms
-import csv
-import numpy as np
 from sklearn import decomposition
+from torch.utils.data import DataLoader
+from torchvision import transforms
+from torchvision.datasets import ImageFolder
 
 # The tensorflow/keras version is not working, so it has been removed
 
@@ -31,7 +32,8 @@ vgg16 = models.vgg16(pretrained=True)
 vgg16 = vgg16.to(device)
 # print(vgg16)
 
-# Below feature extractor is taken from https://stackoverflow.com/questions/55083642/extract-features-from-last-hidden-layer-pytorch-resnet18
+# Below feature extractor is taken from:
+# https://stackoverflow.com/questions/55083642/extract-features-from-last-hidden-layer-pytorch-resnet18
 # See the answer by Manoj Mohan (bottommost post)
 
 """Strip last layer of NN (which hold features)"""
@@ -50,13 +52,13 @@ with open("extractedFeatures/VGG16features.csv", "w") as file:
         images, labels = dataiter.next()
         images = images.to(device)
         features = feature_extractor(images)
-        
+
         # PCA process
         batch_size, nsamples, nx, ny = features.shape
-        
+
         # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
-        features = features.reshape((nsamples, nx*ny))
-        
+        features = features.reshape((nsamples, nx * ny))
+
         # Alternative, simpler solution (subject to discussion)
         # features = torch.flatten(features)
 
@@ -64,11 +66,11 @@ with open("extractedFeatures/VGG16features.csv", "w") as file:
 
         # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
         features = features.cpu().detach().numpy()
-        
+
         # Decomposition of nx*ny features and choosing only the 10 most valuable features to train on
         pca = decomposition.PCA(n_components=10)
         pcaFeature = pca.fit_transform(features)
         # if you need to see the format/structure after using the pca, uncomment the 2 lines below
         # print(pcaX)
         # break
-        write.writerow((labels, pcaFeature)) # write to the csv file 
+        write.writerow((labels, pcaFeature))  # write to the csv file
