@@ -56,6 +56,10 @@ with open("extractedFeatures/VGG16features.csv", "w") as file:
         
         # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
         features = features.reshape((nsamples, nx*ny))
+        
+        # Alternative, simpler solution (subject to discussion)
+        # features = torch.flatten(features)
+
         # print(features.shape)  # torch.Size([1, 512, 7, 7]) == [batch_size, nsamples (number of nx*ny arrays), nx, ny]
 
         # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed

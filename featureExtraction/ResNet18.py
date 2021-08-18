@@ -68,6 +68,10 @@ with open("extractedFeatures/ResNet18features.csv", "w") as file:
         
         # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
         features = features.reshape((nsamples, nx*ny))
+        
+        # Alternative, simpler solution (subject to discussion)
+        # features = torch.flatten(features)
+
         # print(features.shape)  # [batch_size, nsamples (number of nx*ny arrays), nx, ny]
 
         # convert the torch tensor to a numpy tensor for pca

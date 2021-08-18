@@ -1,18 +1,41 @@
 import torch
 import torch.nn as nn
 import torchvision.models as models
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
+from torchvision import transforms
+import csv
+import numpy as np
+from sklearn import decomposition
 
 # The tensorflow/keras version is not working, so it has been removed
 
 # This function needs to have scipy installed (pip3 install scipy)
 
+BATCH_SIZE = 1
+torch.set_printoptions(profile="full")
+np.set_printoptions(threshold=10000)
+
+"""Stores images in batches"""
+# ImageFolder automatically labels images and transforms images to tensors
+# DataLoader stores the images in batches
+
+# Make sure to put in the directory of your "images" folder and not the specific folders.
+# put in like so: ./images/
+image_path = "./images/"
+image = ImageFolder(root=image_path, transform=transforms.ToTensor())
+dataset = DataLoader(dataset=image, batch_size=BATCH_SIZE, shuffle=False)
+
+# Checks if you have cuda. If yes, use cuda, else use cpu
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+"""Model creation"""
 inception = models.inception_v3(pretrained=True)
-inception = inception.cpu() if torch.cuda.is_available() else inception.cpu()
+inception = inception.to(device)
 # print(inception)
 
 # Implementation below is adapted from https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
 # See post #49 by fmassa
-
 
 class MyInceptionFeatureExtractor(nn.Module):
     def __init__(self, inception, transform_input=False):
@@ -86,8 +109,38 @@ class MyInceptionFeatureExtractor(nn.Module):
         x = self.avgpool(x)
         return x
 
+feature_extractor = MyInceptionFeatureExtractor(inception)
 
-"""Test"""
-new_inception = MyInceptionFeatureExtractor(inception)
-features = new_inception.forward(torch.randn([1, 3, 224, 224]))
-print(features.shape)
+"""Extract features from batches and apply PCA"""
+# feature extractor only works with 4-dimensional inputs (single images are 3-dimensional inputs)
+dataiter = iter(dataset)
+
+# code block which extracts the features from the images and send the output (array) to csv file
+with open("extractedFeatures/InceptionV3features.csv", "w") as file:
+    write = csv.writer(file)
+    for i in range(len(dataset)):
+        images, labels = dataiter.next()
+        images = images.to(device)
+        features = feature_extractor.forward(images)
+        
+        # PCA process
+        batch_size, nsamples, nx, ny = features.shape
+        
+        # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
+        features = features.reshape((nsamples, nx*ny))
+        
+        # Alternative, simpler solution (subject to discussion)
+        # features = torch.flatten(features)
+
+        # print(features.shape)  # torch.Size([1, 512, 7, 7]) == [batch_size, nsamples (number of nx*ny arrays), nx, ny]
+
+        # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
+        features = features.cpu().detach().numpy()
+        
+        # Decomposition of nx*ny features and choosing only the 10 most valuable features to train on
+        pca = decomposition.PCA(n_components=10)
+        pcaFeature = pca.fit_transform(features)
+        # if you need to see the format/structure after using the pca, uncomment the 2 lines below
+        # print(pcaX)
+        # break
+        write.writerow((labels, pcaFeature)) # write to the csv file 
