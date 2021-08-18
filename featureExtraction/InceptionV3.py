@@ -60,13 +60,14 @@ class MyInceptionFeatureExtractor(nn.Module):
         self.Mixed_7b = inception.Mixed_7b
         self.Mixed_7c = inception.Mixed_7c
         self.avgpool = inception.avgpool
+        self.dropout = nn.Dropout()
 
     def forward(self, x):
         if self.transform_input:
-            x = x.clone()
-            x[0] = x[0] * (0.229 / 0.5) + (0.485 - 0.5) / 0.5
-            x[1] = x[1] * (0.224 / 0.5) + (0.456 - 0.5) / 0.5
-            x[2] = x[2] * (0.225 / 0.5) + (0.406 - 0.5) / 0.5
+            x_ch0 = torch.unsqueeze(x[:, 0], 1) * (0.229 / 0.5) + (0.485 - 0.5) / 0.5
+            x_ch1 = torch.unsqueeze(x[:, 1], 1) * (0.224 / 0.5) + (0.456 - 0.5) / 0.5
+            x_ch2 = torch.unsqueeze(x[:, 2], 1) * (0.225 / 0.5) + (0.406 - 0.5) / 0.5
+            x = torch.cat((x_ch0, x_ch1, x_ch2), 1)
         # 299 x 299 x 3
         x = self.Conv2d_1a_3x3(x)
         # 149 x 149 x 32
@@ -107,6 +108,9 @@ class MyInceptionFeatureExtractor(nn.Module):
         # N x 2048 x 8 x 8
         # Adaptive average pooling
         x = self.avgpool(x)
+        # N x 2048 x 1 x 1
+        x = self.dropout(x)
+        # N x 2048 x 1 x 1
         return x
 
 feature_extractor = MyInceptionFeatureExtractor(inception)
