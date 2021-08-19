@@ -103,7 +103,6 @@ class MyInceptionFeatureExtractor(nn.Module):
         # N x 768 x 17 x 17
         x = self.Mixed_6e(x)
         # N x 768 x 17 x 17
-        # N x 768 x 17 x 17
         x = self.Mixed_7a(x)
         # N x 1280 x 8 x 8
         x = self.Mixed_7b(x)
