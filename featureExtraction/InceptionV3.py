@@ -64,7 +64,7 @@ class MyInceptionFeatureExtractor(nn.Module):
         self.Mixed_7b = inception.Mixed_7b
         self.Mixed_7c = inception.Mixed_7c
         self.avgpool = inception.avgpool
-        self.dropout = nn.Dropout()
+        self.dropout = inception.dropout
 
     def forward(self, x):
         if self.transform_input:
