@@ -59,10 +59,7 @@ for i in range(len(dataset)):
     pca = decomposition.PCA(n_components=10)
     pcaFeature = pca.fit_transform(features)
 
-    # if you need to see the format/structure after using the pca, uncomment the 2 lines below
-    # print(pcaX)
-    # break
-
+    # convert the labels into human-readable formats (0 to MSIMUT & 1 to MSS)
     labels = labels.detach().numpy()
     label_temp = []
     for x in labels:
@@ -71,6 +68,9 @@ for i in range(len(dataset)):
         elif x == 1:
             label_temp.append("MSS")
     
+    # create dataframe to store and format the data
     df = pd.DataFrame(pcaFeature, columns=['Component1', 'Component2', 'Component3', 'Component4', 'Component5', 'Component6', 'Component7', 'Component8', 'Component9', 'Component10'])
     df['Cancer'] = label_temp
+    
+    # append the formatted data stored in the dataframe to the respective csv file 
     df.to_csv("extractedFeatures/VGG16features.csv", mode = 'a', header=False, index=False)

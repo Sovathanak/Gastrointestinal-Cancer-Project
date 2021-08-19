@@ -12,8 +12,8 @@ from torchvision.datasets import ImageFolder
 
 # For further steps: https://pytorch.org/hub/pytorch_vision_resnet/
 
-# The method above does not work properly for me, I researched further and found this instead, it works for me but just
-# make sure that you install the full pytorch package
+# The method above does not work properly, after further research, the below was found instead
+# Make sure that you install the full pytorch package
 # command below is for the gpu version (if you have an nvidia gpu then it works)
 # pip3 install torch==1.9.0 torchvision==0.10.0 torchaudio===0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
 
@@ -70,10 +70,7 @@ for i in range(len(dataset)):
     pca = decomposition.PCA(n_components=10)
     pcaFeature = pca.fit_transform(features)
     
-    # if you need to see the format/structure after using the pca, uncomment the 2 lines below
-    # print(pcaX)
-    # break
-
+    # convert the labels into human-readable formats (0 to MSIMUT & 1 to MSS)
     labels = labels.detach().numpy()
     label_temp = []
     for x in labels:
@@ -82,6 +79,9 @@ for i in range(len(dataset)):
         elif x == 1:
             label_temp.append("MSS")
     
+    # create dataframe to store and format the data
     df = pd.DataFrame(pcaFeature, columns=['Component1', 'Component2', 'Component3', 'Component4', 'Component5', 'Component6', 'Component7', 'Component8', 'Component9', 'Component10'])
     df['Cancer'] = label_temp
+    
+    # append the formatted data stored in the dataframe to the respective csv file 
     df.to_csv("extractedFeatures/ResNet18features.csv", mode = 'a', header=False, index=False)
