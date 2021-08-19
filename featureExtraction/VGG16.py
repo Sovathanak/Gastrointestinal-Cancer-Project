@@ -1,6 +1,5 @@
-import csv
-
 import numpy as np
+import pandas as pd
 import torch
 import torchvision.models as models
 from sklearn import decomposition
@@ -10,9 +9,7 @@ from torchvision.datasets import ImageFolder
 
 # The tensorflow/keras version is not working, so it has been removed
 
-BATCH_SIZE = 1
-torch.set_printoptions(profile="full")
-np.set_printoptions(threshold=10000)
+BATCH_SIZE = 10
 
 """Stores images in batches"""
 # ImageFolder automatically labels images and transforms images to tensors
@@ -46,31 +43,34 @@ feature_extractor = torch.nn.Sequential(*list(vgg16.children())[:-1])
 dataiter = iter(dataset)
 
 # code block which extracts the features from the images and send the output (array) to csv file
-with open("extractedFeatures/VGG16features.csv", "w") as file:
-    write = csv.writer(file)
-    for i in range(len(dataset)):
-        images, labels = dataiter.next()
-        images = images.to(device)
-        features = feature_extractor(images)
+for i in range(len(dataset)):
+    images, labels = dataiter.next()
+    images = images.to(device)
+    features = feature_extractor(images)
 
-        # PCA process
-        batch_size, nsamples, nx, ny = features.shape
+    # PCA process
+    # reduce tensor dimensions from 4D to 1D
+    features = torch.flatten(features, 1)
 
-        # reshaping the dimensions of the feature tensors to 2 dimensions instead of 4
-        features = features.reshape((nsamples, nx * ny))
+    # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
+    features = features.cpu().detach().numpy()
 
-        # Alternative, simpler solution (subject to discussion)
-        # features = torch.flatten(features)
+    # Decomposition of features and choosing only the 10 most valuable features to train on
+    pca = decomposition.PCA(n_components=10)
+    pcaFeature = pca.fit_transform(features)
 
-        # print(features.shape)  # torch.Size([1, 512, 7, 7]) == [batch_size, nsamples (number of nx*ny arrays), nx, ny]
+    # if you need to see the format/structure after using the pca, uncomment the 2 lines below
+    # print(pcaX)
+    # break
 
-        # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
-        features = features.cpu().detach().numpy()
-
-        # Decomposition of nx*ny features and choosing only the 10 most valuable features to train on
-        pca = decomposition.PCA(n_components=10)
-        pcaFeature = pca.fit_transform(features)
-        # if you need to see the format/structure after using the pca, uncomment the 2 lines below
-        # print(pcaX)
-        # break
-        write.writerow((labels, pcaFeature))  # write to the csv file
+    labels = labels.detach().numpy()
+    label_temp = []
+    for x in labels:
+        if x == 0:
+            label_temp.append("MSIMUT")
+        elif x == 1:
+            label_temp.append("MSS")
+    
+    df = pd.DataFrame(pcaFeature, columns=['Component1', 'Component2', 'Component3', 'Component4', 'Component5', 'Component6', 'Component7', 'Component8', 'Component9', 'Component10'])
+    df['Cancer'] = label_temp
+    df.to_csv("extractedFeatures/VGG16features.csv", mode = 'a', header=False, index=False)
