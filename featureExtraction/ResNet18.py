@@ -20,7 +20,7 @@ from torchvision.datasets import ImageFolder
 # if you don't then the command above will cause errors when you try to run code
 # use this command instead: pip install torch torchvision
 
-BATCH_SIZE = 10
+BATCH_SIZE = 12
 
 """Stores images in batches"""
 # ImageFolder automatically labels images and transforms images to tensors

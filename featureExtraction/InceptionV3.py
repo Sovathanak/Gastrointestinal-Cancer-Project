@@ -12,7 +12,7 @@ from torchvision.datasets import ImageFolder
 
 # This function needs to have scipy installed (pip3 install scipy)
 
-BATCH_SIZE = 10
+BATCH_SIZE = 12
 
 """Stores images in batches"""
 # ImageFolder automatically labels images and transforms images to tensors

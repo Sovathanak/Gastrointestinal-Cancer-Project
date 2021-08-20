@@ -9,7 +9,7 @@ from torchvision.datasets import ImageFolder
 
 # The tensorflow/keras version is not working, so it has been removed
 
-BATCH_SIZE = 10
+BATCH_SIZE = 12
 
 """Stores images in batches"""
 # ImageFolder automatically labels images and transforms images to tensors
