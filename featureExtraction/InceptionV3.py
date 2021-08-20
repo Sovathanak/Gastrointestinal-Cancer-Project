@@ -13,25 +13,23 @@ from torchvision.datasets import ImageFolder
 
 BATCH_SIZE = 12
 
-"""Stores images in batches"""
+'''Stores images in batches'''
 # ImageFolder automatically labels images and transforms images to tensors
 # DataLoader stores the images in batches
 
-# Make sure to put in the directory of your "images" folder and not the specific folders.
+# Make sure to put in the directory of your 'images' folder and not the specific folders.
 # put in like so: ./images/
-image_path = "./images/"
+image_path = './images/'
 image = ImageFolder(root=image_path, transform=transforms.ToTensor())
 dataset = DataLoader(dataset=image, batch_size=BATCH_SIZE, shuffle=False)
 
 # Checks if you have cuda. If yes, use cuda, else use cpu
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-"""Model creation"""
-inception = models.inception_v3(pretrained=True)
-inception = inception.to(device)
+'''Model creation'''
+inceptionV3 = models.inception_v3(pretrained=True)
+inceptionV3 = inceptionV3.to(device)
 
-
-# print(inception)
 
 # Implementation below is adapted from:
 # https://discuss.pytorch.org/t/how-to-extract-features-of-an-image-from-a-trained-model/119
@@ -113,9 +111,9 @@ class MyInceptionFeatureExtractor(nn.Module):
         return x
 
 
-feature_extractor = MyInceptionFeatureExtractor(inception)
+feature_extractor = MyInceptionFeatureExtractor(inceptionV3)
 
-"""Extract features from batches and apply PCA"""
+'''Extract features from batches and apply PCA'''
 # feature extractor only works with 4-dimensional inputs (single images are 3-dimensional inputs)
 dataiter = iter(dataset)
 
@@ -134,20 +132,22 @@ for i in range(len(dataset)):
 
     # Decomposition of nx*ny features and choosing only the 10 most valuable features to train on
     pca = decomposition.PCA(n_components=10)
-    pcaFeature = pca.fit_transform(features)
-    
-     # convert the labels into human-readable formats (0 to MSIMUT & 1 to MSS)
+    pca_feature = pca.fit_transform(features)
+
+    # convert the labels into human-readable formats (0 to MSIMUT & 1 to MSS)
     labels = labels.detach().numpy()
     label_temp = []
-    for x in labels:
-        if x == 0:
-            label_temp.append("MSIMUT")
-        elif x == 1:
-            label_temp.append("MSS")
-    
+    for label in labels:
+        if label == 0:
+            label_temp.append('MSIMUT')
+        elif label == 1:
+            label_temp.append('MSS')
+
     # create dataframe to store and format the data
-    df = pd.DataFrame(pcaFeature, columns=['Component1', 'Component2', 'Component3', 'Component4', 'Component5', 'Component6', 'Component7', 'Component8', 'Component9', 'Component10'])
+    df = pd.DataFrame(pca_feature,
+                      columns=['Component1', 'Component2', 'Component3', 'Component4', 'Component5', 'Component6',
+                               'Component7', 'Component8', 'Component9', 'Component10'])
     df['Cancer'] = label_temp
-    
+
     # append the formatted data stored in the dataframe to the respective csv file 
-    df.to_csv("extractedFeatures/InceptionV3features.csv", mode = 'a', header=False, index=False)
+    df.to_csv('extractedFeatures/InceptionV3features.csv', mode='a', header=False, index=False)
