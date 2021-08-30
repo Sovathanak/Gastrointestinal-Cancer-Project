@@ -47,7 +47,7 @@ for i in range(len(dataset)):
     features = feature_extractor(images)
 
     # PCA process
-    # reduce tensor dimensions from 4D to 1D
+    # reduce tensor dimensions from 4D to 2D
     features = torch.flatten(features, 1)
 
     # convert the torch tensor to a numpy tensor for pca, there will be an error if this line is removed
@@ -60,10 +60,10 @@ for i in range(len(dataset)):
     # convert the labels into human-readable formats (0 to MSIMUT & 1 to MSS)
     labels = labels.detach().numpy()
     label_temp = []
-    for x in labels:
-        if x == 0:
+    for y in labels:
+        if y == 0:
             label_temp.append('MSIMUT')
-        elif x == 1:
+        elif y == 1:
             label_temp.append('MSS')
 
     # create dataframe to store and format the data
