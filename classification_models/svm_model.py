@@ -14,7 +14,7 @@ from matplotlib.colors import Normalize
 # Import extratcted features
 IV3_features = pd.read_csv("extractedFeatures\\InceptionV3features.csv")
 Res_features = pd.read_csv("extractedFeatures\\ResNet18features.csv")
-VGG_features = pd.read_csv("extractedFeatures\\ResNet18features.csv")
+VGG_features = pd.read_csv("extractedFeatures\\VGG16features.csv")
 
 print(IV3_features.shape, Res_features.shape, VGG_features.shape)
 
