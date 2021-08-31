@@ -5,10 +5,14 @@ from sklearn.model_selection import train_test_split
 from sklearn import svm
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GridSearchCV
+from sklearn import metrics
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import Normalize
+import random
+
+# Randomly sample data ensuring proper target class distribution
 
 
 # Import extratcted features
@@ -16,14 +20,18 @@ IV3_features = pd.read_csv("extractedFeatures\\InceptionV3features.csv")
 Res_features = pd.read_csv("extractedFeatures\\ResNet18features.csv")
 VGG_features = pd.read_csv("extractedFeatures\\VGG16features.csv")
 
-print(IV3_features.shape, Res_features.shape, VGG_features.shape)
-
 # Partition data into training and testing sets
 # For now only using IV3 - can expland later
 IV3_features = IV3_features.to_numpy()
+IV3_features = np.append(IV3_features[0:4001, :], IV3_features[-6000:-1, :], axis=0)
+
 X_train_IV3, X_test_IV3, y_train_IV3, y_test_IV3 = train_test_split(
     IV3_features[:, 0:9], IV3_features[:, 10]
 )
+
+index = int(len(X_train_IV3) * 0.001)
+X_valid_IV3, y_valid_IV3 = X_train_IV3[0:index], y_train_IV3[0:index]
+X_train_IV3, y_train_IV3 = X_train_IV3[index:], y_train_IV3[index:]
 
 # Perform gridsearch to set the hyperparatmeters C and gamma
 # Utility function to move the midpoint of a colormap to be around
@@ -46,66 +54,23 @@ gamma_range = np.logspace(-9, 3, 13)
 param_grid = dict(gamma=gamma_range, C=C_range)
 cv = StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=42)
 grid = GridSearchCV(svm.SVC(), param_grid=param_grid, cv=cv)
-grid.fit(X_train_IV3, y_train_IV3)
+grid.fit(X_valid_IV3, y_valid_IV3)
 
 print(
     "The best parameters are %s with a score of %0.2f"
     % (grid.best_params_, grid.best_score_)
 )
 
-# Now we need to fit a classifier for all parameters in the 2d version
-# (we use a smaller set of parameters here because it takes a while to train)
+# Fit a model as per the optimal hyperparameters
+svm_opt = svm.SVC(C=grid.best_params_["C"], gamma=grid.best_params_["gamma"])
+svm_opt.fit(X_train_IV3, y_train_IV3)
+predicted = svm_opt.predict(X_test_IV3)
+print(predicted)
+acc = metrics.accuracy_score(y_test_IV3, predicted)
+auc = metrics.auc(y_test_IV3, predicted)
+prec = metrics.precision_score(y_test_IV3, predicted)
+cm = metrics.confusion_matrix(y_test_IV3, predicted)
 
-C_2d_range = [1e-2, 1, 1e2]
-gamma_2d_range = [1e-1, 1, 1e1]
-classifiers = []
-for C in C_2d_range:
-    for gamma in gamma_2d_range:
-        clf = svm.SVC(C=C, gamma=gamma)
-        clf.fit(X_train_IV3, y_train_IV3)
-        classifiers.append((C, gamma, clf))
-
-# #############################################################################
-# Visualization
-#
-# draw visualization of parameter effects
-
-plt.figure(figsize=(8, 6))
-xx, yy = np.meshgrid(np.linspace(-3, 3, 200), np.linspace(-3, 3, 200))
-for (k, (C, gamma, clf)) in enumerate(classifiers):
-    # evaluate decision function in a grid
-    Z = clf.decision_function(np.c_[xx.ravel(), yy.ravel()])
-    Z = Z.reshape(xx.shape)
-
-    # visualize decision function for these parameters
-    plt.subplot(len(C_2d_range), len(gamma_2d_range), k + 1)
-    plt.title("gamma=10^%d, C=10^%d" % (np.log10(gamma), np.log10(C)), size="medium")
-
-scores = grid.cv_results_["mean_test_score"].reshape(len(C_range), len(gamma_range))
-
-# Draw heatmap of the validation accuracy as a function of gamma and C
-#
-# The score are encoded as colors with the hot colormap which varies from dark
-# red to bright yellow. As the most interesting scores are all located in the
-# 0.92 to 0.97 range we use a custom normalizer to set the mid-point to 0.92 so
-# as to make it easier to visualize the small variations of score values in the
-# interesting range while not brutally collapsing all the low score values to
-# the same color.
-
-plt.figure(figsize=(8, 6))
-plt.subplots_adjust(left=0.2, right=0.95, bottom=0.15, top=0.95)
-plt.imshow(
-    scores,
-    interpolation="nearest",
-    cmap=plt.cm.hot,
-    norm=MidpointNormalize(vmin=0.2, midpoint=0.92),
-)
-plt.xlabel("gamma")
-plt.ylabel("C")
-plt.colorbar()
-plt.xticks(np.arange(len(gamma_range)), gamma_range, rotation=45)
-plt.yticks(np.arange(len(C_range)), C_range)
-plt.title("Validation accuracy")
-plt.show()
-
-# Fit a modle as per the optimal hyperparameters
+# print("Accuracy: {}  AUC: {}  Precision: {}".format(acc, auc, prec))
+print("Confusion matrix:")
+print(cm)
