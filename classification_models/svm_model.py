@@ -6,6 +6,7 @@ from sklearn import svm
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
+from sklearn import preprocessing
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,28 +26,28 @@ VGG_features = pd.read_csv("extractedFeatures\\VGG16features.csv")
 IV3_features = IV3_features.to_numpy()
 IV3_features = np.append(IV3_features[0:4001, :], IV3_features[-6000:-1, :], axis=0)
 
-Cancer_lst = []
-for i in range(len(IV3_features)):
-    if IV3_features[i][-1] == "MSS":
-        Cancer_lst.append(0)
-    elif IV3_features[i][-1] == "MSIMUT":
-        Cancer_lst.append(1)
-    else:
-        print("Something is broken, somewhere...")
+X, y = IV3_features[:, 0:9], IV3_features[:, 10]
 
-Cancer_lst = np.array(Cancer_lst)
-Cancer_lst = Cancer_lst.reshape(-1, 1)
-
-print(Cancer_lst)
-
+# Preprocessing test
+X = preprocessing.scale(X)
 
 X_train_IV3, X_test_IV3, y_train_IV3, y_test_IV3 = train_test_split(
-    IV3_features[:, 0:9], Cancer_lst
+    X, y,
+    test_size=0.1,
+    train_size=0.9
 )
 
-index = int(len(X_train_IV3) * 0.1)
-X_valid_IV3, y_valid_IV3 = X_train_IV3[0:index], y_train_IV3[0:index]
-X_train_IV3, y_train_IV3 = X_train_IV3[index:], y_train_IV3[index:]
+X_train_IV3, X_valid_IV3, y_train_IV3, y_valid_IV3 = train_test_split(
+    X_train_IV3, y_train_IV3,
+    test_size=float(1/9),
+    train_size=float(8/9)
+)
+print("Data split done.")
+
+
+# index = int(len(X_train_IV3) * (1/9))
+# X_valid_IV3, y_valid_IV3 = X_train_IV3[0:index], y_train_IV3[0:index]
+# X_train_IV3, y_train_IV3 = X_train_IV3[index:], y_train_IV3[index:]
 
 # Perform gridsearch to set the hyperparameters C and gamma
 # Utility function to move the midpoint of a colormap to be around
@@ -81,11 +82,17 @@ svm_opt = svm.SVC(C=grid.best_params_["C"], gamma=grid.best_params_["gamma"])
 svm_opt.fit(X_train_IV3, y_train_IV3)
 predicted = svm_opt.predict(X_test_IV3)
 print(predicted)
-acc = metrics.accuracy_score(y_test_IV3, predicted)
-auc = metrics.auc(y_test_IV3, predicted)
-prec = metrics.precision_score(y_test_IV3, predicted)
+# acc = metrics.accuracy_score(y_test_IV3, predicted)
+# auc = metrics.auc(y_test_IV3, predicted)
+# prec = metrics.precision_score(y_test_IV3, predicted)
 cm = metrics.confusion_matrix(y_test_IV3, predicted)
 
 # print("Accuracy: {}  AUC: {}  Precision: {}".format(acc, auc, prec))
 print("Confusion matrix:")
 print(cm)
+print(metrics.classification_report(y_test_IV3, predicted))
+
+# Confusion matrix:
+#               Pred False    Pred True
+# Actual False [[1487 (FP)    0 (TN)]
+# Actual True   [1013 (TP)    0 (FN)]]
