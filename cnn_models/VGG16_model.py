@@ -318,7 +318,7 @@ def plot_scores(history):
     plt.ylabel('score')
     plt.title('F1 score vs. No. of epochs')
     plt.show()
-    plt.savefig("ResNet34_SMOTE_resampling_scores_no_augmentation")
+    plt.savefig("VGG16_SMOTE_resampling_scores")
 
 #%%
 def plot_losses(history):
@@ -331,7 +331,7 @@ def plot_losses(history):
     plt.legend(['Training', 'Validation'])
     plt.title('Loss vs. No. of epochs')
     plt.show()
-    plt.savefig("ResNet34_SMOTE_resampling_losses_no_augmentation")
+    plt.savefig("VGG16_SMOTE_resampling_losses")
 
 #%%
 def plot_lrs(history):
@@ -341,9 +341,107 @@ def plot_lrs(history):
     plt.ylabel('Learning rate')
     plt.title('Learning Rate vs. Batch no.')
     plt.show()
-    plt.savefig("ResNet34_SMOTE_resampling_lrs_no_augmentation")
+    plt.savefig("VGG16_SMOTE_resampling_lrs")
 
 #%%
 plot_scores(history)
 plot_losses(history)
 plot_lrs(history)
+
+#%%
+def show_sample(img, invert=True):
+    if invert:
+        plt.imshow(1 - img.permute((1, 2, 0)))
+    else:
+        plt.imshow(img.permute(1, 2, 0))
+
+def predict_single(image, label, threshold=0.5):
+    xb = image.unsqueeze(0)
+    xb = to_device(xb, device)
+    preds = model(xb)
+    prediction = preds[0]
+    pred_label = [1 if prediction>threshold else 0][0]
+    print("Predicted Prob: ", prediction[0])
+    print("Predicted Label: ", pred_label)
+    print("Actual Label: ", label)
+    show_sample(image)
+
+#%%
+predict_single(*test_ds[100])
+
+#%%
+predict_single(*test_ds[4990])
+
+#%%
+# Function to Generate Prediction
+
+@torch.no_grad()
+def predict_dl(dl, model, threshold=0.5):
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    else:
+        torch.empty_cache()
+    batch_probs = []
+    for xb, _ in tqdm(dl):
+        probs = model(xb)
+        batch_probs.append(probs.cpu().detach())
+    batch_probs = torch.cat(batch_probs)
+    return [int(x) for x in batch_probs>threshold]
+
+#%%
+# Analyze Prediction Results
+test_preds = predict_dl(test_dl, model)
+actual_label = test_dl.dl.dataset.targets
+
+#%%
+f1 = f1_score(actual_label, test_preds)
+f_score = float(np.array(F_score(torch.tensor(np.array(test_preds).reshape(len(test_preds), 1)), torch.tensor(np.array(actual_label).reshape(len(actual_label), 1)))))
+accuracy = accuracy_score(actual_label, test_preds)
+cm = confusion_matrix(actual_label, test_preds)
+report = classification_report(actual_label, test_preds)
+
+print("Model F-Score (Test Data): ", f_score)
+print("Model F1-Score (Test Data): ", f1)
+print("Model Accuracy: ", accuracy)
+print("Confusion Matrix:\n", cm)
+print("\nClassification Report:\n", report)
+
+# Plot Confusion Matrix
+df_cm = pd.DataFrame(cm, index = [i for i in "01"], columns = [i for i in "01"])
+plt.figure(figsize = (10,7))
+sns.set(font_scale=1.4)
+sns.heatmap(df_cm, cmap="Oranges", annot=True, annot_kws={"size": 16})
+plt.title("Plot of Confusion Matrix")
+plt.show()
+plt.savefig("VGG16_SMOTE_resampling_CM")
+
+#%%
+weights_fname = 'gastrointestinal-cancer-classification-VGG16-SMOTE_resampling.pth'
+torch.save(model.state_dict(), weights_fname)
+
+#%%
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+else:
+    torch.empty_cache()
+batch_probs = []
+for xb, _ in tqdm(test_dl):
+    xb = xb[1:2,:,:,:]
+    probs = model(xb)
+    graph = hl.build_graph(model, xb)
+    graph.theme = hl.graph.THEMES['blue'].copy()
+    graph.save('VGG16_SMOTE_resampling', format='png')
+    make_dot(probs, params=dict(list(model.named_parameters()))).render("VGG16__SMOTE_resampling_torchviz", format="png")
+    break
+
+#%%
+#### After Resampling
+temp = np.unique(samples, return_counts=True)
+
+print(temp)
+# Plot Train Records
+plt.bar(temp[0], temp[1], tick_label=temp[0])
+plt.title("Number of Training Images for Each Class (After Resampling)")
+plt.xlabel("Classes")
+plt.ylabel("Number of Images")
+plt.savefig("SMOTE_resampling")
