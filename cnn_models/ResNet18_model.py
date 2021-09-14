@@ -1,8 +1,8 @@
 import os
 import torch
 import torchvision
-import splitfolders
-from torch import nn
+import splitfolders # pip install split-folders
+from torch import nn 
 from d2l import torch as d2l
 
 splitfolders.ratio("images2", output="split_output", seed=1337, ratio=(.6,.4))
@@ -30,7 +30,7 @@ print(pretrained_net.fc)
 
 finetune_net = torchvision.models.resnet18(pretrained=True)
 finetune_net.fc = nn.Linear(finetune_net.fc.in_features, 2)
-nn.init.xavier_uniform_(finetune_net.fc.weight);
+nn.init.xavier_uniform_(finetune_net.fc.weight)
 
 # If `param_group=True`, the model parameters in the output layer will be
 # updated using a learning rate ten times greater
