@@ -1,0 +1,2 @@
+# Ignore the split data folder, so nobody pushes it
+/cancer_data_split/
