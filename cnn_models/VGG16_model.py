@@ -106,22 +106,37 @@ class ImageClassificationBase(nn.Module):
         reshaped_images = images.reshape([images.shape[0], images.shape[1]*images.shape[2]*images.shape[3]])
         if (np.unique(targets, return_counts=True)[1][1]>6) and (np.unique(targets, return_counts=True)[1][0]>6):
             sampled_images, sampled_targets = SMOTE().fit_sample(reshaped_images, targets)
-            images = torch.from_numpy(sampled_images.reshape([len(sampled_images), images.shape[1], images.shape[2], images.shape[3]]))
-            targets = torch.from_numpy(sampled_targets)
+            if torch.cuda.is_available():
+                images = torch.from_numpy(sampled_images.reshape([len(sampled_images), images.shape[1], images.shape[2], images.shape[3]])).cuda()
+                targets = torch.from_numpy(sampled_targets).cuda()
+            else:
+                images = torch.from_numpy(sampled_images.reshape([len(sampled_images), images.shape[1], images.shape[2], images.shape[3]]))
+                targets = torch.from_numpy(sampled_targets)
         else:
-            images = reshaped_images.reshape([len(reshaped_images), images.shape[1], images.shape[2], images.shape[3]])
-            sampled_targets = targets.numpy()
-            targets = targets
+            if torch.cuda.is_available():
+                images = reshaped_images.reshape([len(reshaped_images), images.shape[1], images.shape[2], images.shape[3]]).cuda()
+                sampled_targets = targets.numpy()
+                targets = targets.cuda()
+            else:
+                images = reshaped_images.reshape([len(reshaped_images), images.shape[1], images.shape[2], images.shape[3]])
+                sampled_targets = targets.numpy()
+                targets = targets
         
         # Training Step
-        targets = torch.reshape(targets.type(torch.FloatTensor), (len(targets), 1))
+        if torch.cuda.is_available():
+            targets = torch.reshape(targets.type(torch.cuda.FloatTensor), (len(targets), 1))
+        else:
+            targets = torch.reshape(targets.type(torch.FloatTensor), (len(targets), 1))
         out = self(images)                      
         loss = F.binary_cross_entropy(out, targets)      
         return loss, sampled_targets
     
     def validation_step(self, batch):
         images, targets = batch
-        targets = torch.reshape(targets.type(torch.FloatTensor), (len(targets), 1))
+        if torch.cuda.is_available():
+            targets = torch.reshape(targets.type(torch.cuda.FloatTensor), (len(targets), 1))
+        else:
+            targets = torch.reshape(targets.type(torch.FloatTensor), (len(targets), 1))
         out = self(images)                           # Generate predictions
         loss = F.binary_cross_entropy(out, targets)  # Calculate loss
         score = F_score(out, targets)
@@ -211,7 +226,10 @@ def get_lr(optimizer):
 
 def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader, 
                   weight_decay=0, grad_clip=None, opt_func=torch.optim.SGD):
-    torch.empty_cache()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    else:
+        torch.empty_cache()
     history = []
     
     # Set up cutom optimizer with weight decay
