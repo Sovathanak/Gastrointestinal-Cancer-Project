@@ -3,7 +3,6 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-import tarfile
 from tqdm.notebook import tqdm
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix, classification_report
 import seaborn as sns
@@ -11,22 +10,16 @@ import pandas as pd
 import time
 from torchviz import make_dot
 import hiddenlayer as hl
-from collections import Counter
 from imblearn.over_sampling import SMOTE
 
 import torch
-import torchvision
 import torch.nn as nn
 import torch.nn.functional as F
-from torchvision.datasets.utils import download_url
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 import torchvision.transforms as tt
-from torch.utils.data import random_split
 from torchvision.utils import make_grid
-from torchvision import transforms
 import torchvision.models as models
-from torch.utils.data.sampler import SubsetRandomSampler, WeightedRandomSampler
 
 #%%
 # Data Transform
