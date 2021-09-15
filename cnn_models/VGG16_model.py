@@ -98,7 +98,7 @@ class ImageClassificationBase(nn.Module):
         # SMOTE Resampling
         reshaped_images = images.reshape([images.shape[0], images.shape[1]*images.shape[2]*images.shape[3]])
         if (np.unique(targets, return_counts=True)[1][1]>6) and (np.unique(targets, return_counts=True)[1][0]>6):
-            sampled_images, sampled_targets = SMOTE().fit_sample(reshaped_images, targets)
+            sampled_images, sampled_targets = SMOTE().fit_resample(reshaped_images, targets)
             if torch.cuda.is_available():
                 images = torch.from_numpy(sampled_images.reshape([len(sampled_images), images.shape[1], images.shape[2], images.shape[3]])).cuda()
                 targets = torch.from_numpy(sampled_targets).cuda()
@@ -120,7 +120,7 @@ class ImageClassificationBase(nn.Module):
             targets = torch.reshape(targets.type(torch.cuda.FloatTensor), (len(targets), 1))
         else:
             targets = torch.reshape(targets.type(torch.FloatTensor), (len(targets), 1))
-        out = self(images)                      
+        out = self(images)
         loss = F.binary_cross_entropy(out, targets)      
         return loss, sampled_targets
     
@@ -162,7 +162,7 @@ class GastrointestinalCancerVGG16(ImageClassificationBase):
         # To freeze the residual layers
         for param in self.network.parameters():
             param.require_grad = False
-        for param in self.network.fc.parameters():
+        for param in self.network.classifier._modules['6'].parameters():
             param.require_grad = True
     
     def unfreeze(self):
@@ -221,8 +221,6 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader,
                   weight_decay=0, grad_clip=None, opt_func=torch.optim.SGD):
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
-    else:
-        torch.empty_cache()
     history = []
     
     # Set up cutom optimizer with weight decay
@@ -372,8 +370,6 @@ predict_single(*test_ds[4990])
 def predict_dl(dl, model, threshold=0.5):
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
-    else:
-        torch.empty_cache()
     batch_probs = []
     for xb, _ in tqdm(dl):
         probs = model(xb)
@@ -415,8 +411,6 @@ torch.save(model.state_dict(), weights_fname)
 #%%
 if torch.cuda.is_available():
     torch.cuda.empty_cache()
-else:
-    torch.empty_cache()
 batch_probs = []
 for xb, _ in tqdm(test_dl):
     xb = xb[1:2,:,:,:]
