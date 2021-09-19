@@ -1,2 +1,1 @@
-# format of the variable file (> 2gb) which is stored by the model
 .data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
