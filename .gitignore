@@ -1,3 +1,3 @@
 # Ignore the split data folder, so nobody pushes it
 /cancer_data_split/
-/cnn/inception_checkpoints/
+/cnn_models/inception_checkpoints/
