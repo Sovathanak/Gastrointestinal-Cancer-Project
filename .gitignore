@@ -2,3 +2,10 @@
 /cancer_data_split/
 /cnn_models/inception_checkpoints/best_model
 /cnn_models/inception_checkpoints/best_finetuned_model
+cnn_models/inception_checkpoints/transfer_learning_model/variables/variables.index
+cnn_models/inception_checkpoints/transfer_learning_model/variables/variables.data-00000-of-00001
+cnn_models/inception_checkpoints/transfer_learning_model/saved_model.pb
+cnn_models/inception_checkpoints/transfer_learning_model/keras_metadata.pb
+cnn_models/inception_checkpoints/best_model/keras_metadata.pb
+*.pb
+cnn_models/inception_checkpoints/best_model/keras_metadata.pb
