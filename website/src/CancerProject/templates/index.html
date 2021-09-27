@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team8 | Home</title>
+  <title>Team7 | Home</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/main.css">
@@ -25,6 +25,9 @@
         <ul class="show-desktop hide-mobile" id="nav">
           <li id="exit" class="exit-btn hide-desktop"><img src="{% static '/images/exit.png' %}" alt=""></li>
           <li><a href="{% url 'home'%}">Home</a></li>
+          <li><a href="{% url 'home'%}">Information About Gastrointestinal Cancer</a></li>
+          <li><a href="{% url 'home'%}">Upload Image</a></li>
+          <li><a href="{% url 'home'%}">Contact Us</a></li>
         </ul>
       </nav>
     </header>
@@ -32,7 +35,7 @@
     <section>
       <img class="image" src="{% static '/images/gastro_icon.png' %}" alt="Gastro Graphic">
       <h1 class="heart_tagline">Using Convolutional Neural Networks to Assist Early Detection</h1>
-      <p class="subhead">Use our cutting edge CNN technology to assist in gastrointestinal cancer diagnostics
+      <p class="subhead">Use our cutting edge CNN technology to assist in gastrointestinal cancer diagnostics for your histopathological image now
       </p>
       <div id="just-line-break"></div>
       <div id="just-line-break"></div>
@@ -40,11 +43,12 @@
       <div id="just-line-break"></div>
     </section>
   </div>
-
+  <br>
+  <br>
   <section>
     <div class="container">
       <div class="form-outline-main">
-        <h2>Upload your image now.</h2>
+        <h2><a href="{% url 'home'%}">Upload your image now</a></h2>
       </div>
     </div>
   </section>
@@ -55,7 +59,7 @@
         <li>
           <img src="{% static '/images/gastro_icon.png' %}" alt="Icon-1">
           <p>
-            <b>Gastrointestinal cancer is a leading cause of death, which can be mitigated through early deteciton.</b>
+            <b>Gastrointestinal cancer is a leading cause of death, which can be mitigated through early detection.</b>
             It's now more important than ever to stay on top of your health and get checked out regularly<br><br><b>We
               can help</b>
           </p>
@@ -88,7 +92,7 @@
         <a href="{% url 'home'%}">
           <img class="sa-logo" src="{% static '/images/logo.jpg' %}" alt="Team8 Logo">
         </a>
-        <p class="address">13 Ancora Imparo Way, Monash University, 3800<br>VIC</p>
+        <p class="address">13 Ancora Imparo Way<br>Monash University<br>3800 VIC</p>
         <ul class="footer-links">
           <li><a href="#">Terms of Service</a></li>
           <li><a href="#">Privacy Policy</a></li>

@@ -79,7 +79,7 @@ h1, .subhead {
 
 .dark-container {
   width: 100%;
-  background: #a6bddb;
+  background: #002b62;
   color: #fff;
   margin-top: 10%;
   padding: 3em 0 2em;
@@ -177,12 +177,13 @@ h2 {
 }
 
 footer {
-  background: #deebf7;
+  background: #002b62;
   margin-top: 3em;
 } 
 
 .footer-container {
   padding: .7em;
+  color: #fff;
 }
 
 .sa-logo {
