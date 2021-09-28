@@ -24,9 +24,10 @@
         <ul class="show-desktop hide-mobile" id="nav">
           <li id="exit" class="exit-btn hide-desktop"><img src="{% static '/images/exit.png' %}" alt=""></li>
           <li><a href="{% url 'home'%}">Home</a></li>
-          <li><a href="{% url 'info'%}">Learn More About Gastrointestinal Cancer</a></li>
+          <li><a href="{% url 'info'%}">Learn About Gastrointestinal Cancer</a></li>
           <li><a href="{% url 'model'%}">Upload Image</a></li>
-          <li><a href="{% url 'home'%}">Contact Us</a></li>
+          <li><a href="{% url 'contact'%}">Our Team</a></li>
+          <li><a href="{% url 'privacy'%}">Privacy Policy</a></li>
         </ul>
       </nav>
     </header>
@@ -53,6 +54,14 @@
       </div>
     </div>
   </section>
+  <div class="container">
+    <section>
+      <p class="subhead">Note: <br>Our model is intended for early detections and second opinions. 
+        Combined with predictive results from our model, we highly recommend you to seek professional help
+        to make a more informed decision.
+      </p>
+    </section>
+  </div>
 
   <div class="dark-container">
     <div class="container">

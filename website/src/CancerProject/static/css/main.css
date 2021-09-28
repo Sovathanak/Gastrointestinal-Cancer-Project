@@ -24,6 +24,11 @@
    padding: 1.2em 1.2em .5em; 
  }
 
+ .container-2 {
+  text-align: center;
+  padding: 1.1em 1.1em .5em; 
+}
+
   .container-button {
    text-align: center;
    padding: 2.4em 1.2em .5em; 
@@ -70,6 +75,12 @@ h1, .subhead {
 .subhead {
   font-size: 1.2em;
   margin-top: 1.5em;
+}
+
+.subhead-bold {
+  font-size: 1.2em;
+  margin-top: 1.5em;
+  font-weight: bold;
 }
 
 .subhead-form {
@@ -436,5 +447,6 @@ nav ul li a:hover {
     padding: .5em 6em;
     margin-bottom: -6%;
   }
+
 
 }

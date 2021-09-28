@@ -34,32 +34,21 @@
     </header>
 
     <section>
-      <h1 class="title">Gastrointestinal Cancer Diagnostics</h1>
-      <p class="subhead">Disclaimer: The results from this program will not be 100% accurate. If you feel that you may have developed cancer, we strongly advise you to visit a doctor immediately!
-      </p>
-    </section>
+        <h1 class="heart_tagline">Our Vision and Mission</h1>
+        <p class="subhead">In an effort to raise awareness surrounding gastrointestinal cancer and galvanize potential cancer victims to take early action, 
+          we created a predictive model that aims to provide free and accessible gastrointestinal cancer diagnostics for early detections and second opinions.<br>
+        </p>
+      </section>
   </div>
   <br>
   <br>
+<div class="container">
   <section>
-    <div class="container">
-      <h2>Upload your image here</h2>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <input type="file" name="upload" accept="image/*">
-            <br>
-            <button class="btn btn-dark my-4" type="submit">Submit</button>
-      </form>
-
-          <h2>Image Uploaded:</h2>
-            {% if file_url %}
-              <img src="{{ file_url }}" class="img-fluid">
-              <br>
-            {% else %}
-            <p>No image uploaded.</p>
-            {% endif %}
+    <h1 class="title">Contact Information</h1>
+    <p class="subhead">Gastrointestinal cancer refers to a group of cancers that affect the gastrointestinal tract and other organs in the digestive system.
+    </p>
   </section>
-
+</div>
   <div class="dark-container">
     <div class="container">
       <ul>
