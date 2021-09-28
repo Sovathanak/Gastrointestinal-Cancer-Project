@@ -98,7 +98,7 @@ h1, .subhead {
 
 .dark-container-2 {
   width: 100%;
-  background: #a6bddb;
+  background: #2b8cbe;
   color: #fff;
   padding: 2em 0 3em;
   margin-bottom: 2em;
@@ -258,10 +258,11 @@ nav ul li a:hover {
 }
 
 .form-outline-main {
+  color: #EA7B74;
   box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 
   0 18px 36px -18px rgba(0,0,0,.3), 
   0 -12px 36px -8px rgba(0,0,0,.025);
-  padding: 0.5em 1.2em 1.5em; 
+   padding: 0.5em 1.2em 1.5em; 
   border-radius: 10px;
   margin: 2.5em 0 1em;
 }
@@ -387,6 +388,7 @@ nav ul li a:hover {
     box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 
     0 18px 36px -18px rgba(0,0,0,.3), 
     0 -12px 36px -8px rgba(0,0,0,.025);
+    color: #EA7B74;
     padding: 0.5em 1.2em 1.5em; 
     border-radius: 5px;
     margin: 2em 10em 1em;
@@ -399,7 +401,7 @@ nav ul li a:hover {
 
   .dark-container-2 {
     width: 100%;
-    background: #EA7B74;
+    background: #2b8cbe;
     color: #fff;
     padding: 2em 0 3em;
     margin-bottom: 3em;
