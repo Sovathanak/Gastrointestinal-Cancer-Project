@@ -16,6 +16,14 @@ def model_view(request, *args, **kwargs):
     # return HttpResponse("<h1>Test</h1>")
     return render(request, "model.html", {})
 
+def contact_view(request, *args, **kwargs):
+    # return HttpResponse("<h1>Test</h1>")
+    return render(request, "contact.html", {})
+
+def privacy_view(request, *args, **kwargs):
+    # return HttpResponse("<h1>Test</h1>")
+    return render(request, "privacy.html", {})
+
 def upload(request):
     if request.method == 'POST' and request.FILES['upload']:
         upload = request.FILES['upload']

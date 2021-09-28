@@ -17,7 +17,7 @@
     <header>
       <div class="nav-brand">
         <a class="nav-item" href="{% url 'home'%}">
-          <img class="logo" src="{% static '/images/logo.JPG' %}" alt="Team8 Logo">
+          <img class="logo" src="{% static '/images/logo.png' %}" alt="Team7 Logo">
         </a>
       </div>
       <nav>
@@ -25,9 +25,10 @@
         <ul class="show-desktop hide-mobile" id="nav">
           <li id="exit" class="exit-btn hide-desktop"><img src="{% static '/images/exit.png' %}" alt=""></li>
           <li><a href="{% url 'home'%}">Home</a></li>
-          <li><a href="{% url 'info'%}">Learn More About Gastrointestinal Cancer</a></li>
+          <li><a href="{% url 'info'%}">Learn About Gastrointestinal Cancer</a></li>
           <li><a href="{% url 'model'%}">Upload Image</a></li>
-          <li><a href="{% url 'home'%}">Contact Us</a></li>
+          <li><a href="{% url 'contact'%}">Our Team</a></li>
+          <li><a href="{% url 'privacy'%}">Privacy Policy</a></li>
         </ul>
       </nav>
     </header>
@@ -96,13 +97,9 @@
     <div class="footer-container">
       <div class="container">
         <a href="{% url 'home'%}">
-          <img class="sa-logo" src="{% static '/images/logo.jpg' %}" alt="Team8 Logo">
+          <img class="sa-logo" src="{% static '/images/logo.png' %}" alt="Team8 Logo">
         </a>
         <p class="address">13 Ancora Imparo Way<br>Monash University<br>3800 VIC</p>
-        <ul class="footer-links">
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
       </div>
     </div>
   </footer>

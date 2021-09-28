@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team7 | Home</title>
+  <title>Team7 | Information</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="shortcut icon" href="/static/images/sa_logo.ico" />
 </head>
 
 <body>
@@ -33,47 +34,34 @@
     </header>
 
     <section>
-      <h1 class="heart_tagline">Using Convolutional Neural Networks to Assist Early Detection</h1>
-      <p class="subhead">Use our cutting edge CNN technology to assist in gastrointestinal cancer diagnostics for your
-        histopathological image now
+      <h1 class="title">Privacy Policy</h1>
+      <p class="subhead">Gastrointestinal cancer refers to a group of cancers that affect the gastrointestinal tract and other organs in the digestive system.
       </p>
     </section>
   </div>
   <br>
   <br>
   <section>
-    <span style="margin-left: 2.5em;padding: 50em 0 50em 0;">&nbsp;</span>
-    <span style="margin-left: 2.5em;padding: 50em 0 50em 0;">&nbsp;</span>
-    <span style="margin-left: 2.5em;padding: 50em 0 50em 0;">&nbsp;</span>
-    <span style="margin-left: 2.5em;padding: 50em 0 50em 0;">&nbsp;</span>
     <div class="container">
       <div class="form-outline-main">
-        <h2><a href="{% url 'model'%}">Upload your image now</a></h2>
+        <h2><a href="{% url 'home'%}">Upload your image now</a></h2>
       </div>
     </div>
   </section>
-  <div class="container">
-    <section>
-      <p class="subhead">Note: <br>Our model is intended for early detections and second opinions. 
-        Combined with predictive results from our model, we highly recommend you to seek professional help
-        to make a more informed decision.
-      </p>
-    </section>
-  </div>
 
   <div class="dark-container">
     <div class="container">
       <ul>
         <li>
-          <img src="{% static '/images/icon1.png' %}" alt="Icon-1">
+          <img src="{% static '/images/gastro_icon.png' %}" alt="Icon-1">
           <p>
-            <b>Gastrointestinal cancer is a leading cause of death, which can be mitigated through early deteciton.</b>
+            <b>Gastrointestinal cancer is a leading cause of death, which can be mitigated through early detection.</b>
             It's now more important than ever to stay on top of your health and get checked out regularly<br><br><b>We
               can help</b>
           </p>
         </li>
         <li>
-          <img src="{% static '/images/icon2.png' %}" alt="Icon-2">
+          <img src="{% static '/images/gastro_icon.png' %}" alt="Icon-2">
           <p>
             <b>Data and healthcare go hand in hand.</b>
             Through the vast amounts of data and powerful modelling methods available today, there have been significant
@@ -81,7 +69,7 @@
           </p>
         </li>
         <li>
-          <img src="{% static '/images/icon3.png' %}" alt="Icon-3">
+          <img src="{% static '/images/gastro_icon.png' %}" alt="Icon-3">
           <p>
             <b>We've combined expertise in machine learning and artificial intelligence.</b>
             By simply inputing a compatible histopathological image patch, our state of the art model can accurately
