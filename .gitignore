@@ -9,3 +9,4 @@ cnn_models/inception_checkpoints/transfer_learning_model/keras_metadata.pb
 cnn_models/inception_checkpoints/best_model/keras_metadata.pb
 *.pb
 cnn_models/inception_checkpoints/best_model/keras_metadata.pb
+*.html
