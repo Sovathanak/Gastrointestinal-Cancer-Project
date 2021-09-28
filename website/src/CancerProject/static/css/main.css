@@ -479,4 +479,8 @@ nav ul li a:hover {
     margin-right: auto;
   }
 
+  .source{
+    text-align: right;
+  }
+
 }
