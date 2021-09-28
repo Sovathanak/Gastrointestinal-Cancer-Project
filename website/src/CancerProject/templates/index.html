@@ -63,37 +63,37 @@
 
   <div class="dark-container">
     <div class="container">
-      <ul>
-        <li>
-          <img src="{% static '/images/icon1.png' %}" alt="Icon-1">
-          <p>
-            <b>Gastrointestinal cancer is a leading cause of death, which can be mitigated through early deteciton.</b>
-            It's now more important than ever to stay on top of your health and get checked out regularly<br><br><b>We
-              can help</b>
-          </p>
-        </li>
-        <li>
-          <img src="{% static '/images/icon2.png' %}" alt="Icon-2">
-          <p>
-            <b>Data and healthcare go hand in hand.</b>
-            Through the vast amounts of data and powerful modelling methods available today, there have been significant
-            advances in modern medicine<br><br><b>That's good for you</b>
-          </p>
-        </li>
-        <li>
-          <img src="{% static '/images/icon3.png' %}" alt="Icon-3">
-          <p>
-            <b>We've combined expertise in machine learning and artificial intelligence.</b>
-            By simply inputing a compatible histopathological image patch, our state of the art model can accurately
-            predict if you might be
-            at risk<br><br><b>Want to try it out?</b>
-          </p>
-        </li>
-      </ul>
+      <section>
+        <div class="row2">
+          <div class="column2">
+            <img src="{% static '/images/icon1.png' %}" alt="histopathological cancer image">
+            <p>
+              Gastrointestinal cancer is a leading cause of death, which can be mitigated through early detection.</b>
+        It's now more important than ever to stay on top of your health and get checked out regularly.<br><br><b>
+          Get checked out now
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon2.png' %}" alt="histopathological cancer image">
+            <p>
+              Data and healthcare go hand in hand.</b>
+        Through the vast amounts of data and powerful modelling methods available today, there have been significant
+        advances in modern medicine<br><br><b>That's good for you</b>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon3.png' %}" alt="histopathological cancer image">
+            <p>
+              We've combined expertise in machine learning and artificial intelligence.<br>
+        By simply inputing a compatible histopathological image, our state of the art model can accurately
+        predict your chances of being at risk.<br><br><a href="{% url 'model'%}">Want to try it out?</a>
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-
-
+  
   <footer>
     <div class="footer-container">
       <div class="container">

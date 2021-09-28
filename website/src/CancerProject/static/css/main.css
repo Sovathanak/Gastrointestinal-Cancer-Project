@@ -464,6 +464,18 @@ nav ul li a:hover {
     display: table;
   }
 
+  .column2 {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+  }
+
+  .row2::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
   table, th, td {
     border: 1px solid black;
     padding: 15px;
