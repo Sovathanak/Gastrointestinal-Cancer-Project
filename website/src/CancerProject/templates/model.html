@@ -42,10 +42,21 @@
   <br>
   <section>
     <div class="container">
-      <div class="form-outline-main">
-        <h2><a href="{% url 'home'%}">Upload your image now</a></h2>
-      </div>
-    </div>
+      <h2>Upload your image here</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <input type="file" name="upload" accept="image/*">
+            <br>
+            <button class="btn btn-dark my-4" type="submit">Submit</button>
+      </form>
+
+          <h2>Image Uploaded:</h2>
+            {% if file_url %}
+              <img src="{{ file_url }}" class="img-fluid">
+              <br>
+            {% else %}
+            <p>No image uploaded.</p>
+            {% endif %}
   </section>
 
   <div class="dark-container">
