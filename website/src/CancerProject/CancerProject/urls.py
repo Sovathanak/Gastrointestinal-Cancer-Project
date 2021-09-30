@@ -18,7 +18,7 @@ from django.urls import path
 from pages import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import url
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home_view, name="home"),
@@ -26,5 +26,6 @@ urlpatterns = [
     path("model/", views.model_view, name="model"),
     path("contact/", views.contact_view, name="contact"),
     path("privacy/", views.privacy_view, name="privacy"),
+    url('image_prediction', views.image_prediction, name = 'image_prediction'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -41,26 +41,28 @@
     </section>
   </div>
   <br>
-  <br>
   <section>
     <div class="container">
       <h2>Upload your image here</h2>
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data", action="image_prediction">
         {% csrf_token %}
         <input type="file" name="upload" accept="image/*">
         <br>
         <button class="btn btn-dark my-4" type="submit">Submit</button>
-      </form>
-
+        <p style="color: #FF0000">Note: Image must be of .jpg and .png format with 224x224 and a resolution of 0.5 micron pixels</p>
       <h2>Image Uploaded:</h2>
       {% if file_url %}
-      <img src="{{ file_url }}" class="img-fluid">
+      <img src={{file_url}} alt = 'imagename'>
       <br>
+      <h4>Classification of this image: {{prediction_label}}</h4>
       {% else %}
-      <p>No image uploaded.</p>
+      <p>No image uploaded</p>
       {% endif %}
+
+    </form>
   </section>
 
+<<<<<<< Updated upstream
 
   <div class="dark-container">
     <div class="container">
@@ -97,6 +99,8 @@
     </div>
   </div>
   
+=======
+>>>>>>> Stashed changes
   <footer>
     <div class="footer-container">
       <div class="container">
