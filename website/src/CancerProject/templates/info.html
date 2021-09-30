@@ -38,7 +38,7 @@
       <b>
         <p class="subhead">Gastrointestinal cancer refers to a family of cancers (conditions of
           abnormal cell growth) that affect the digestive system.
-          Gastrointestinal cancer is one of the most common form of cancer and it impacts both men and women.
+          Gastrointestinal cancer is the most common form of cancer in Australia and it impacts both men and women.
           Annually, approximately 30,000 Australians are diagnosed with some form of gastrointestinal cancer.<br><br>
           Specific types of gastrointestinal cancers include:
         </p>
@@ -79,7 +79,7 @@
   <div class="content">
     <section>
       <br>
-      <img src="{% static '/images/cancer_info.jpg' %}" alt="Infographic">
+      <img src="{% static '/images/cancer_info.jpg' %}" width ="1000" height="500" alt="Infographic">
       <br>
     </section>
   </div>
@@ -92,6 +92,8 @@
   </section>
 </div>
   </div>
+
+  
 
   <div class="container">
     <section>
@@ -109,6 +111,8 @@
         <li class="subhead">Alcohol consumption</li>
         <br>
         <li class="subhead">Overweight or obese</li>
+        <br>
+        <li class="subhead">Lack of exercise</li>
         <br>
         <li class="subhead">Family history of gastrointestinal cancer</li>
         <br>
@@ -133,6 +137,24 @@
   <br>
   <br>
   <br>
+  <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info4.jpeg' %}" width ="1200" height="400" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
   <div class="container">
     <section>
       <h1 class="title">Signs and Symptoms</h1>
@@ -172,15 +194,45 @@
       </p>
     </section>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info5.jpeg' %}" width ="1200" height="400" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
 
-  <br>
-  <br>
   <br>
   <br>
   <div class="container">
     <section>
       <h1 class="title">Early Diagnosis and Treatment</h1>
-      <p class="subhead">
+      <p class="subhead">Modern medicine cannot effectively treat many cancers, including gastrointestinal cancer, 
+        especially at its later stages. Therefore, early detection allows for more treatment options and often leads 
+        to higher survival rates. Some early cases 
+        of cancers may show signs and symptoms. However, that is not always the case.<br><br>
+
+        Screening is a proactive testing for a disease, such as cancer, for people without symptoms. Routine screening is a practice 
+        used in certain places where gastrointestinal cancer is common. Depending on the person's level of risk, regular screening
+        may or may not be worthwhile. <br><br>
+
+        What you can do is to educate yourself further about gastrointestinal cancer and keep a check on your body.
+        Based on the risk factors, if you identify yourself with a higher-than-average risk level, or feel worried
+        and want to gain further clarification, we strongly advise you to go to a doctor and get professional advice
+        on your condition and future steps to take.
       </p>
     </section>
   </div>
@@ -188,11 +240,63 @@
   <br>
   <br>
   <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info3.jpg' %}" width ="500" height="450" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
+  <div class="dark-container">
+    <div class="container">
+      <section>
+        <div class="row2">
+          <div class="column2">
+            <img src="{% static '/images/icon1.png' %}" alt="histopathological cancer image">
+            <p>
+              Gastrointestinal cancer is one of the leading causes of death in Australia, which can be mitigated through early detection.</b>
+        It's now more important than ever to stay on top of your health and get checked out regularly.
+        <br><br><a href="https://www.healthdirect.gov.au/australian-health-services">
+          Want to get checked out?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon2.png' %}" alt="histopathological cancer image">
+            <p>
+              Data and healthcare go hand in hand.</b>
+        Through the vast amounts of research conducted, there have been significant
+        medical advances in modern medicine. It's crucial that you educate yourself on the latest
+        available information.<br><br><a href="https://gicancer.org.au/about-us/">Want to learn more?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon3.png' %}" alt="histopathological cancer image">
+            <p>
+              We've combined expertise in machine learning and artificial intelligence.<br>
+        By simply inputing a compatible histopathological image, our state of the art model can accurately
+        predict your chances of being at risk.<br><br><a href="{% url 'model'%}">Want to try it out?</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
   <footer>
     <div class="footer-container">
       <div class="container">
         <a href="{% url 'home'%}">
-          <img class="sa-logo" src="{% static '/images/logo_white.png' %}" alt="Team7 Logo">
+          <img class="sa-logo" src="{% static '/images/logo_white.png' %}" width="300" height="100" alt="Team7 Logo">
         </a>
         <p class="address">13 Ancora Imparo Way<br>Monash University<br>3800 VIC</p>
       </div>
