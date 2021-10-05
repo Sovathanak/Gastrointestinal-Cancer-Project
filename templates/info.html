@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team7 | Home</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+  {% load static %}
+  <div class="container">
+    <header>
+      <div class="nav-brand">
+        <a class="nav-item" href="{% url 'home'%}">
+          <img class="logo" src="{% static '/images/logo.png' %}" alt="Team7 Logo">
+        </a>
+      </div>
+      <nav>
+        <a class="hide-desktop"><img src="{% static '/images/ham.svg' %}" alt="toggle menu" class="menu" id="menu"></a>
+        <ul class="show-desktop hide-mobile" id="nav">
+          <li id="exit" class="exit-btn hide-desktop"><img src="{% static '/images/exit.png' %}" alt=""></li>
+          <li><a href="{% url 'home'%}">Home</a></li>
+          <li><a href="{% url 'info'%}">Learn About Gastrointestinal Cancer</a></li>
+          <li><a href="{% url 'model'%}">Upload Image</a></li>
+          <li><a href="{% url 'contact'%}">Our Team</a></li>
+          <li><a href="{% url 'privacy'%}">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </header>
+
+
+    <section>
+      <h1 class="heart_tagline">Gastrointestinal Cancers Kill <br>~40 Australians Per Day</h1>
+      <b>
+        <p class="subhead">Gastrointestinal cancer refers to a family of cancers (conditions of
+          abnormal cell growth) that affect the digestive system.
+          Gastrointestinal cancer is the most common form of cancer in Australia and it impacts both men and women.
+          Annually, approximately 30,000 Australians are diagnosed with some form of gastrointestinal cancer.<br><br>
+          Specific types of gastrointestinal cancers include:
+        </p>
+      </b>
+      <br>
+      <br>
+      <ul>
+
+        <li class="subhead">Stomach (gastric) cancer</li>
+        <br>
+        <li class="subhead">Bowel (colorectal) cancer</li>
+        <br>
+        <li class="subhead">Liver cancer</li>
+        <br>
+        <li class="subhead">Duodenal cancer</li>
+        <br>
+        <li class="subhead">Bile duct cancer</li>
+        <br>
+        <li class="subhead">Biliary cancer</li>
+        <br>
+        <li class="subhead">Gallbladder cancer</li>
+        <br>
+        <li class="subhead">Oesophagul cancer</li>
+        <br>
+        <li class="subhead">Pancreatic cancer</li>
+        <br>
+        <li class="subhead">Small intestinal cancer</li>
+        <br>
+        <li class="subhead">Rectal cancer</li>
+        <br>
+        <li class="subhead">Anal cancer</li>
+        <br>
+      </ul>
+      <br>
+    </section>
+  </div>
+  
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info.jpg' %}" width ="1000" height="500" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: AGITG, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
+  
+
+  <div class="container">
+    <section>
+      <h1 class="title">Risk Factors and Prevention</h1>
+      <p class="subhead">
+        Factors that may increase your risk of gastrointestinal cancer includes:
+      </p>
+      <br>
+      <br>
+      <ul>
+        <li class="subhead">Smoking tobacco</li>
+        <br>
+        <li class="subhead">Age over 60</li>
+        <br>
+        <li class="subhead">Alcohol consumption</li>
+        <br>
+        <li class="subhead">Overweight or obese</li>
+        <br>
+        <li class="subhead">Lack of exercise</li>
+        <br>
+        <li class="subhead">Family history of gastrointestinal cancer</li>
+        <br>
+        <li class="subhead">Diet high in smoked, pickled and salted foods<br> and low in fruit and vegetables</li>
+        <br>
+        <li class="subhead">Infection with the bacteria Helicobacter pylori</li>
+        <br>
+        <li class="subhead">Previous stomach surgery</li>
+        <br>
+        <li class="subhead">Pernicious anaemia (low red blood cells)</li>
+        <br>
+        <li class="subhead">Chronic gastritis (inflammation of the stomach)</li>
+        <br>
+      </ul>
+      <br>
+      <p class="subhead">Having one or more of these risk factors does not guarantee you will get gastrointestinal cancer.
+        Some of these risk factors can be controlled and some can not.
+        We strongly advise you to avoid these risk factors to help reduce your chances of contracting some form of gastrointestinal cancer.
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info4.jpeg' %}" width ="1200" height="400" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
+  <div class="container">
+    <section>
+      <h1 class="title">Signs and Symptoms</h1>
+      <p class="subhead">Early-stage gastrointestinal cancer rarely cause symptoms.<br>
+        Cases may vary but when the cancer does cause symptoms, <br>
+        they may include the following:
+      </p>
+      <br>
+      <br>
+      <ul>
+        <li class="subhead">Loss of appetite</li>
+        <br>
+        <li class="subhead">Sense of fullness after only small meals</li>
+        <br>
+        <li class="subhead">Abnormal weight loss</li>
+        <br>
+        <li class="subhead">Unexplained Fatigue</li>
+        <br>
+        <li class="subhead">Abdominal pain or discomfort</li>
+        <br>
+        <li class="subhead">Heartburn or indigestion</li>
+        <br>
+        <li class="subhead">Nausea</li>
+        <br>
+        <li class="subhead">Vomitting with blood</li>
+        <br>
+        <li class="subhead">Swelling or fluid build-up in the abdomen</li>
+        <br>
+        <li class="subhead">Yellowing of the skin and eyes <br>
+        (if cancer spreads to liver)</li>
+        <br>
+      </ul>
+      <br>
+      <p class="subhead">These are symptoms generally found in gastrointestinal cancer patients.<br>
+        While the symptoms may be caused by other types of cancer or diseases, <br>
+        we strongly advise you to see a doctor if you have these symptoms, especially if they get worse, in order to find out the cause.
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info5.jpeg' %}" width ="1200" height="400" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
+  <br>
+  <br>
+  <div class="container">
+    <section>
+      <h1 class="title">Early Diagnosis and Treatment</h1>
+      <p class="subhead">Modern medicine cannot effectively treat many cancers, including gastrointestinal cancer, 
+        especially at its later stages. Therefore, early detection allows for more treatment options and often leads 
+        to higher survival rates. Some early cases 
+        of cancers may show signs and symptoms. However, that is not always the case.<br><br>
+
+        Screening is a proactive testing for a disease, such as cancer, for people without symptoms. Routine screening is a practice 
+        used in certain places where gastrointestinal cancer is common. Depending on the person's level of risk, regular screening
+        may or may not be worthwhile. <br><br>
+
+        What you can do is to educate yourself further about gastrointestinal cancer and keep a check on your body.
+        Based on the risk factors, if you identify yourself with a higher-than-average risk level, or feel worried
+        and want to gain further clarification, we strongly advise you to go to a doctor and get professional advice
+        on your condition and future steps to take.
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section>
+      <br>
+      <img src="{% static '/images/cancer_info3.jpg' %}" width ="500" height="450" alt="Infographic">
+      <br>
+    </section>
+  </div>
+  <div class="container">
+  <section>
+    <br>
+    <p class='source'>
+      Source: Bowel Cancer Australia, 2021
+    </p>
+  </section>
+</div>
+  </div>
+
+  <div class="dark-container">
+    <div class="container">
+      <section>
+        <div class="row2">
+          <div class="column2">
+            <img src="{% static '/images/icon1.png' %}" alt="histopathological cancer image">
+            <p>
+              Gastrointestinal cancer is one of the leading causes of death in Australia, which can be mitigated through early detection.</b>
+        It's now more important than ever to stay on top of your health and get checked out regularly.
+        <br><br><a href="https://www.healthdirect.gov.au/australian-health-services">
+          Want to get checked out?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon2.png' %}" alt="histopathological cancer image">
+            <p>
+              Data and healthcare go hand in hand.</b>
+        Through the vast amounts of research conducted, there have been significant
+        medical advances in modern medicine. It's crucial that you educate yourself on the latest
+        available information.<br><br><a href="https://gicancer.org.au/about-us/">Want to learn more?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon3.png' %}" alt="histopathological cancer image">
+            <p>
+              We've combined expertise in machine learning and artificial intelligence.<br>
+        By simply inputing a compatible histopathological image, our state of the art model can accurately
+        predict your chances of being at risk.<br><br><a href="{% url 'model'%}">Want to try it out?</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="footer-container">
+      <div class="container">
+        <a href="{% url 'home'%}">
+          <img class="sa-logo" src="{% static '/images/logo_white.png' %}" width="300" height="100" alt="Team7 Logo">
+        </a>
+        <p class="address">13 Ancora Imparo Way<br>Monash University<br>3800 VIC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/menu.js"></script>
+
+</body>
+
+</html>

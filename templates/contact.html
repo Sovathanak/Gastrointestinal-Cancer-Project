@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team7 | Information</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="shortcut icon" href="/static/images/sa_logo.ico" />
+</head>
+
+<body>
+  {% load static %}
+  <div class="container">
+    <header>
+      <div class="nav-brand">
+        <a class="nav-item" href="{% url 'home'%}">
+          <img class="logo" src="{% static '/images/logo.png' %}" alt="Team7 Logo">
+        </a>
+      </div>
+      <nav>
+        <a class="hide-desktop"><img src="{% static '/images/ham.svg' %}" alt="toggle menu" class="menu" id="menu"></a>
+        <ul class="show-desktop hide-mobile" id="nav">
+          <li id="exit" class="exit-btn hide-desktop"><img src="{% static '/images/exit.png' %}" alt=""></li>
+          <li><a href="{% url 'home'%}">Home</a></li>
+          <li><a href="{% url 'info'%}">Learn About Gastrointestinal Cancer</a></li>
+          <li><a href="{% url 'model'%}">Upload Image</a></li>
+          <li><a href="{% url 'contact'%}">Our Team</a></li>
+          <li><a href="{% url 'privacy'%}">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section>
+      <h1 class="heart_tagline">Our Vision and Mission</h1>
+      <p class="subhead">In an effort to raise awareness surrounding gastrointestinal cancer and galvanize potential
+        cancer victims to take early action,
+        we created a predictive model that aims to provide free and accessible gastrointestinal cancer diagnostics for
+        early detections and second opinions.<br>
+      </p>
+      <br>
+      <p class="subhead">This website was created to bridge users with our predictive model while providing digestible information
+        about gastrointestinal cancer and directing users to trusted sources for further information and help.
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <section>
+      <h1 class="title">Our Predictive Model</h1>
+      <p class="subhead">Our Convolutional Neural Network model is trained on 192,312 unique image patches taken from
+        histopathological images of <br>colorectal cancer and gastric cancer patients.
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+  <section>
+    <div class="row">
+      <div class="column">
+        <img src="{% static '/images/cancer1.jpg' %}" alt="histopathological cancer image">
+      </div>
+      <div class="column">
+        <img src="{% static '/images/cancer2.jpg' %}" alt="histopathological cancer image">
+      </div>
+      <div class="column">
+        <img src="{% static '/images/cancer3.jpg' %}" alt="histopathological cancer image">
+      </div>
+    </div>
+    <br>
+    <p class='source'>
+      Source: Kaggle, 2021
+    </p>
+  </section>
+  </div>
+
+  <div class="container">
+    <section>
+      <p class="subhead">Combined with an application of fine-tuning techniques from our end, our model is optimised 
+        to make a prediction of either MSIMUT (cancerous tumour) or MSS (non-cancerous tumour) when given 
+        histopathological images of the gastrointestinal region.
+        <br>
+        <br>
+        Our model was tested on four performance metrics and achieved:
+        <br>
+        <br>
+        Accuracy: 75%
+        <br>
+        <br>
+        Sensitivity: 82%
+        <br>
+        <br>
+        Specificity: 76%
+        <br>
+        <br>
+        AUC: 0.74
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <section>
+      <h1 class="title">Contact Information</h1>
+      <p class="subhead">For further information, please feel free to reach out to any of our team members 
+        through the contact information listed below:
+      </p>
+    </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <section>
+      <table class="center">
+        <tr>
+          <th>Name</th>
+          <th>Contact Email</th>
+        </tr>
+        <tr>
+          <td>Alexander Waddington</td>
+          <td>awad0003@student.monash.edu</td>
+        </tr>
+        <tr>
+          <td>Sovathanak Meas</td>
+          <td>smea0004@student.monash.edu</td>
+        </tr>
+        <tr>
+          <td>Wen Juin Pang</td>
+          <td>wpan0014@student.monash.edu</td>
+        </tr>
+        <tr>
+          <td>Vincent Arson Taneli</td>
+          <td>vtan0024@student.monash.edu</td>
+        </tr>
+      </table>
+    </section>
+  </div>
+  
+  <div class="dark-container">
+    <div class="container">
+      <section>
+        <div class="row2">
+          <div class="column2">
+            <img src="{% static '/images/icon1.png' %}" alt="histopathological cancer image">
+            <p>
+              Gastrointestinal cancer is one of the leading causes of death in Australia, which can be mitigated through early detection.</b>
+        It's now more important than ever to stay on top of your health and get checked out regularly.
+        <br><br><a href="https://www.healthdirect.gov.au/australian-health-services">
+          Want to get checked out?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon2.png' %}" alt="histopathological cancer image">
+            <p>
+              Data and healthcare go hand in hand.</b>
+        Through the vast amounts of research conducted, there have been significant
+        medical advances in modern medicine. It's crucial that you educate yourself on the latest
+        available information.<br><br><a href="https://gicancer.org.au/about-us/">Want to learn more?</a>
+            </p>
+          </div>
+          <div class="column2">
+            <img src="{% static '/images/icon3.png' %}" alt="histopathological cancer image">
+            <p>
+              We've combined expertise in machine learning and artificial intelligence.<br>
+        By simply inputing a compatible histopathological image, our state of the art model can accurately
+        predict your chances of being at risk.<br><br><a href="{% url 'model'%}">Want to try it out?</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="footer-container">
+      <div class="container">
+        <a href="{% url 'home'%}">
+          <img class="sa-logo" src="{% static '/images/logo_white.png' %}" width="300" height="100" alt="Team7 Logo">
+        </a>
+        <p class="address">13 Ancora Imparo Way<br>Monash University<br>3800 VIC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/menu.js"></script>
+
+</body>
+
+</html>
