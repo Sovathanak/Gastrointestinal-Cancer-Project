@@ -59,7 +59,7 @@ def image_prediction(request):
             with tf_session.as_default():
                 prediction_res = model.predict(x)
         # placeholder for showing prediction (incomplete/unsure)
-        if prediction_res > 0.5:
+        if prediction_res < 0:
             prediction_label = "MSS"
         else:
             prediction_label = "MSIMUT"
