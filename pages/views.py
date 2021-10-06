@@ -8,12 +8,10 @@ from tensorflow import Graph
 import tensorflow as tf
 import json
 import numpy as np
-import os
-from CancerProject.settings import BASE_DIR
 
 # load in the model
 height, width = 224, 224
-with open(os.path.join(BASE_DIR, "static/models/model.json"), 'r') as model:
+with open("website/src/CancerProject/static/models/model.json", 'r') as model:
     label = model.read()
 label = json.loads(label)
 
@@ -21,7 +19,7 @@ model_graph = Graph()
 with model_graph.as_default():
     tf_session = tf.compat.v1.Session()
     with tf_session.as_default():
-        model = load_model(os.path.join(BASE_DIR, "static/models/inception_model.h5"))
+        model = load_model("website/src/CancerProject/static/models/inception_model.h5")
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
