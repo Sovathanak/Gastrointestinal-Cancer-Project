@@ -54,11 +54,13 @@
       {% if file_url %}
       <img src={{file_url}} alt = 'imagename'>
       <br>
+      <br>
       <h4>Classification of this image: {{prediction_label}}</h4>
+      <br>
+      <h4>We are 74% accurate of this prediction.</h4>
       {% else %}
       <p>No image uploaded</p>
       {% endif %}
-
     </form>
   </section>
 
