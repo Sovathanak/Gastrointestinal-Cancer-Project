@@ -50,7 +50,7 @@ def image_prediction(request):
         fss = FileSystemStorage()
         file = fss.save(upload.name, upload)
         file_url = fss.url(file)
-        test_image = '.'+file_url
+        test_image = 'website/src/CancerProject'+file_url
         
         # load image
         img = image.load_img(test_image, target_size = (height, width))

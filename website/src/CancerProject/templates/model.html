@@ -35,8 +35,8 @@
 
     <section>
       <h1 class="title">Gastrointestinal Cancer Diagnostics</h1>
-      <p class="subhead">Disclaimer: The results from this program will not be 100% accurate. If you feel that you may
-        have developed cancer, we strongly advise you to visit a doctor immediately!
+      <p class="subhead">Disclaimer: <br>The results from this program will not be 100% accurate. <br>If you feel that you may
+        have developed cancer, <br>we strongly advise you to visit a doctor immediately!
       </p>
     </section>
   </div>
@@ -47,9 +47,15 @@
       <form method="post" enctype="multipart/form-data", action="image_prediction">
         {% csrf_token %}
         <input type="file" name="upload" accept="image/*">
+        <br><br>
+        <p style="color: #FF0000">Note: File must be of .jpg and .png format</p>
+        <p class="subhead">Please upload a histopathological image of the gastrointestinal region. <br>
+          Otherwise, the prediction would not make sense.
+        </p>
+        <br>
         <br>
         <button class="btn btn-dark my-4" type="submit">Submit</button>
-        <p style="color: #FF0000">Note: Image must be of .jpg and .png format</p>
+        <br>
       <h2>Image Uploaded:</h2>
       {% if file_url %}
       <img src={{file_url}} alt = 'imagename'>
