@@ -53,7 +53,7 @@
       <h2>Upload your image here</h2>
       <form method="post" enctype="multipart/form-data", action="image_prediction">
         {% csrf_token %}
-        <input type="file" name="upload" accept="image/*">
+        <input type="file" required name="upload" accept="image/*">
         <br><br>
         <p style="color: #FF0000">Note: File must be of .jpg and .png format</p>
         <p class="subhead">Please upload a histopathological image of the gastrointestinal region. <br>
